@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Menu from './Menu';
 import Search from './Search';
-import SliderBanner from './SliderBanner';
 import BannerInfo from './BannerInfo';
 
 export class Header extends Component {
@@ -13,7 +12,6 @@ export class Header extends Component {
             <div className="inner-header-agile">
               <Menu></Menu>
               <Search></Search>
-              <SliderBanner></SliderBanner>
             </div>
           </div>
           <BannerInfo></BannerInfo>
