@@ -1,0 +1,82 @@
+import React, { Component } from 'react';
+import './App.css';
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      brand: "Ford",
+      model: "Eco",
+      year: "1984",
+      status: 0,
+      value: ''
+    }
+
+    // create ref
+    this.examRef = React.createRef()
+  }
+
+  _rendEdit = ()=> {
+    return (
+      <div className="button-group">
+          <button onClick={this._changeStateButton} >Edit</button>
+      </div>
+    )
+  }
+
+  _rendSave = ()=> {
+    return (
+      <div className="button-group">
+        <input type="text" name="brand" />
+        <button onClick={this._changeStateButton} >Save</button>
+      </div>
+    )
+  }
+
+  _checkStatus = ()=> {
+    if(this.state.status === 0) {
+      return ( 
+        this._rendEdit() 
+      )
+    } else {
+      return( 
+        this._rendSave()
+      )
+    }
+  }
+
+  _changeStateButton = ()=> {
+    if ( this.state.status === 0 ) {
+      { this.setState ({
+            status: 1
+        })
+      }
+    } else {
+      { this.setState ({
+          status: 0
+        })
+      }
+    }
+  }
+
+  handerClick = ()=> {
+    return '';
+  }
+
+  render() {
+    console.log(this.examRef);
+    return (
+      <div className="App">
+        <h1>My check</h1>
+        { this._checkStatus() }
+
+        <br/>
+
+        <input type="text" ref={this.examRef} onChange={this.handerClick} />
+      </div>
+    );
+    
+  }
+}
+
+export default App;
