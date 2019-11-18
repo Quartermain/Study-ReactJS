@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import FooterBottomLinks from './FooterBottomLinks';
 
 export class FooterLinks extends Component {
   render() {

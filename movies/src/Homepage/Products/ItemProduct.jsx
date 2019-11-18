@@ -27,7 +27,7 @@ export class ItemProduct extends Component {
           </div>
         </div>
         <div className="ribben one">
-          <p>NEW</p>
+          <p>{this.props.data.ribben}</p>
         </div>
       </div>
     );
