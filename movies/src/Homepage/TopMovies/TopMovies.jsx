@@ -7,7 +7,7 @@ export class TopMovies extends Component {
   _letTopMovies = ()=> {
     let itemTopProduct = DataBase.map(function(val, index){
       return (
-        <div className="w3l-movie-gride-agile">
+        <div className="w3l-movie-gride-agile" key={index}>
           <ItemProduct data={val} />
         </div>
       )
@@ -28,7 +28,7 @@ export class TopMovies extends Component {
                 </div>
                 <div className="col-md-5 video_agile_player second-top">
                   <div className="video-grid-single-page-agileits">
-                    <div data-video="BXEZFd0RT5Y" id="video3"> <img src="images/44.jpg" alt className="img-responsive" /> </div>
+                    <div data-video="BXEZFd0RT5Y" id="video3"> <img src="images/44.jpg" alt="true" className="img-responsive" /> </div>
                   </div>
                   <div className="player-text two">
                     <p className="fexi_header">Storks </p>

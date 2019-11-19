@@ -7,8 +7,8 @@ export class LastestMovies extends Component {
   _letLastestMovies = ()=> {
     let itemLastestMovie = DataBase.map(function(val, index){
       return (
-        <div className="item">
-          <div className="w3l-movie-gride-agile w3l-movie-gride-slider"  key={index} >
+        <div className="item" key={index} >
+          <div className="w3l-movie-gride-agile w3l-movie-gride-slider">
             <ItemProduct data={val}/>
           </div>
         </div>
