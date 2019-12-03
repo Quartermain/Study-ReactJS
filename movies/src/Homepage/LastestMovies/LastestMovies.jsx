@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ItemProduct from './../Products/ItemProduct';
 import DataBase from './../../Database/Data.json';
+// import Services from './../../Services';
 
 export class LastestMovies extends Component {
  
@@ -17,6 +18,7 @@ export class LastestMovies extends Component {
 
     return ( itemLastestMovie )
   }
+  
 
   render() {
     return (
@@ -27,6 +29,8 @@ export class LastestMovies extends Component {
             {this._letLastestMovies()}
           </div>
         </div>
+
+        {/* <Services/> */}
       </div>
 
     );

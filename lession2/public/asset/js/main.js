@@ -1,4 +1,6 @@
 jQuery(document).ready(function($){
+	$('demo-1').zoomSlider();
+
 	//if you change this breakpoint in the style.css file (or _layout.scss if you use SASS), don't forget to update this value as well
 	var MqL = 1170;
 	//move nav element position according to window width
@@ -8,9 +10,7 @@ jQuery(document).ready(function($){
     (!window.requestAnimationFrame) ? setTimeout(moveNavigation, 300) : window.requestAnimationFrame(moveNavigation);   
    
   });
-
-  $('demo-1').zoomSlider();
-
+  
 	//mobile - open lateral menu clicking on the menu icon
 	$('.cd-nav-trigger').on('click', function(event){
 		event.preventDefault();

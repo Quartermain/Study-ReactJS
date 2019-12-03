@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MainProduct from './../Homepage/Products/MainProduct';
 import ItemProduct from './../Homepage/Products/ItemProduct';
 import DataBase from './../Database/Data.json';
-
+import axios from 'axios';
 
 export class Tab extends Component {
 
@@ -13,7 +13,35 @@ export class Tab extends Component {
     }
   }
 
+  _getData = ()=> {
+        
+    let _dataAxios = axios.get('https://api.themoviedb.org/3/movie/latest?api_key=1e2d3e04a46a4b641682a83ebd1b0bf1&language=en-US');
+
+    console.log("xxxxxxx::::");
+    console.log(_dataAxios);
+    let aaa = _dataAxios.then(function (response) {
+            // handle success
+            console.log(response);
+            return response;
+            console.log(response);
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        })
+        .finally(function () {
+            // always executed
+        });
+
+    console.log(aaa);
+    return _dataAxios;
+
+  }
+
   _getItemsProduct = () => {
+    console.log(this._getData());
+    this._getData();
+
     let itemProduct = DataBase.map(function(val, index){
       const totalItem = 5;
       if (index < totalItem){
@@ -63,7 +91,7 @@ export class Tab extends Component {
     console.log(this.state);
     console.log('End shouldComponentUpdate:::::::::');
 
-    if (nextState != this.state) {
+    if (nextState !== this.state) {
       return true
     } else return false
   }
@@ -76,7 +104,6 @@ export class Tab extends Component {
         )  
       }
     })
-
     return (itemMainProduct)
   }
 
@@ -111,7 +138,7 @@ export class Tab extends Component {
                     { this._letMainProduct() }
                   </div>
                   <div className="col-md-7 wthree_agile-movies_list">
-                      {/* { this._letItemsProduct() } */}
+                      { this._letItemsProduct() }
                   </div>
                   <div className="clearfix"> </div>
                 </div>
@@ -125,7 +152,7 @@ export class Tab extends Component {
                     { this._letMainProduct() }
                   </div>
                   <div className="col-md-7 wthree_agile-movies_list">
-                      {/* { this._letItemsProduct() } */}
+                      { this._letItemsProduct() }
                   </div>
                   <div className="clearfix"> </div>
                 </div>
