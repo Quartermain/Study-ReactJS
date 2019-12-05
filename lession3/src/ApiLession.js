@@ -14,7 +14,7 @@ class ApiLession extends Component {
         
         const params = {
             param1: "movie",
-            param2: "popular",
+            param2: "top_rated",
         }
 
         console.log("Check params::::");

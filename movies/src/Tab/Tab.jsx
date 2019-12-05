@@ -17,9 +17,7 @@ export class Tab extends Component {
         
     let _dataAxios = axios.get('https://api.themoviedb.org/3/movie/latest?api_key=1e2d3e04a46a4b641682a83ebd1b0bf1&language=en-US');
 
-    console.log("xxxxxxx::::");
-    console.log(_dataAxios);
-    let aaa = _dataAxios.then(function (response) {
+    let dataAsiox = _dataAxios.then(function (response) {
             // handle success
             console.log(response);
             return response;
@@ -32,10 +30,7 @@ export class Tab extends Component {
         .finally(function () {
             // always executed
         });
-
-    console.log(aaa);
-    return _dataAxios;
-
+    return dataAsiox;
   }
 
   _getItemsProduct = () => {
@@ -66,12 +61,7 @@ export class Tab extends Component {
   }
 
   _letItemsProduct = () => {
-    console.log("aaaaa");
-    console.log(this.state.dataBaseState);
-    console.log("bbb");
     if (this.state.dataBaseState) {
-      console.log("this state database:::::::");
-      console.log(this.state.dataBaseState);
       let itemTopProduct = this.state.dataBaseState.map(function(val, index){
         if(val) {
           return (
@@ -86,11 +76,6 @@ export class Tab extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('shouldComponentUpdate:::::::::');
-    console.log(nextState);
-    console.log(this.state);
-    console.log('End shouldComponentUpdate:::::::::');
-
     if (nextState !== this.state) {
       return true
     } else return false
