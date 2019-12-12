@@ -12,3 +12,8 @@ export const getMoviesList = (params) => {
     console.log(path);
     return axios.get(path);
 };
+
+export const getConfiguration = () => {
+    const path = 'https://api.themoviedb.org/3/configuration?api_key=1e2d3e04a46a4b641682a83ebd1b0bf1'
+    return axios.get(path);
+};

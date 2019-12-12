@@ -17,17 +17,18 @@ class ApiLession extends Component {
             param2: "top_rated",
         }
 
-        console.log("Check params::::");
-        console.log(params);
+        // console.log("Check params::::");
+        // console.log(params);
 
         const getMovie = getMoviesList(params);
-        console.log("Check getMovie::::");
-        console.log(getMovie);
+        // console.log("Check getMovie::::");
+        // console.log(getMovie);
 
         getMovie.then(res => {
-            console.log(res);
+            // console.log(res);
+            
+            // console.log(itemProduct);
             const itemProduct = res.data.results;
-            console.log(itemProduct);
             this.setState({ listData:itemProduct });
             // console.log("ListData::::");
         })
@@ -49,12 +50,12 @@ class ApiLession extends Component {
 
     _itemProduct = ()=> {
         let itemDetail = this.state.listData;
-        console.log("Call Sate list data:::::");
-        console.log(itemDetail);
+        // console.log("Call Sate list data:::::");
+        // console.log(itemDetail);
 
         if (itemDetail !== 0 ) {
-            console.log("Call Sate list data Item Detail:::::");
-            console.log(itemDetail);
+            // console.log("Call Sate list data Item Detail:::::");
+            // console.log(itemDetail);
 
             let item = itemDetail.map(function(val, index){
                 console.log(val);
@@ -72,8 +73,8 @@ class ApiLession extends Component {
     
 
     render() {
-        console.log("Render::::");
-        console.log(this.state);
+        // console.log("Render::::");
+        // console.log(this.state);
         return (
             
             <div>
