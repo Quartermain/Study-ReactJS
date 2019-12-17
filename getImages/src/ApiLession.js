@@ -129,7 +129,7 @@ class ApiLession extends Component {
 
         return (
             <div>
-                {this._itemProduct()}
+                { this._itemProduct() }
             </div>
         );
     }
