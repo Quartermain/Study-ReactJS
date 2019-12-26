@@ -5,7 +5,7 @@ export class ItemProduct extends Component {
     return (
       <div>
         <a href="single.html" className="hvr-sweep-to-bottom">
-          <img src={this.props.data.img} title="Movies Pro" className="img-responsive" alt="true" />
+          <img src={this.props.data._url} title="Movies Pro" className="img-responsive" alt="true" />
           <div className="w3l-action-icon"><i className="fa fa-play-circle-o" aria-hidden="true" /></div>
         </a>
         <div className="mid-1 agileits_w3layouts_mid_1_home">

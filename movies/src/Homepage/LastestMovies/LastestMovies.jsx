@@ -1,33 +1,77 @@
 import React, { Component } from 'react';
 import ItemProduct from './../Products/ItemProduct';
-// import DataBase from './../../Database/Data.json';
-import { getMovieList } from '../../Services';
+import { getDiscoverList } from '../../Services';
+import { getConfiguration } from '../../Services';
 
 export class LastestMovies extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      listData : []
+      listData : [],
+      configuration: {
+        images: {
+          "base_url": "",
+          "secure_base_url": "",
+          "backdrop_sizes": [
+            ""
+          ]
+        }
+      }
     }
   }
 
-  componentDidMount() {
+  _getConfigImage =() => {
+    const configImg = getConfiguration();
+
+    return configImg
+  }
+
+  _getDiscoverList =()=> {
     const params = {
-      params1: "movie",
-      params2: "latest"
+      params1: "discover",
+      params2: "movie"
     }
 
-    const getMovie = getMovieList(params);
+    const getMovie = getDiscoverList(params);
 
-    getMovie.then(res=> {
-      const listProduct = res.data;
-      console.log("test res.data::::");
-      console.log(res.data);
+    return getMovie
+  }
 
-      this.setState({listData:listProduct});
-    })
-    .catch(error => console.log(error));
+  _promissAll = ()=> {
+    const getConfig = this._getConfigImage();
+    const getList = this._getDiscoverList();
+
+    Promise.all([getConfig, getList]).then(values => {
+      const configPromisImage = values[0].data.images;
+
+      const base_url = configPromisImage.base_url;
+      const backdrop_sizes = configPromisImage.backdrop_sizes[2];
+
+      const pathUrl = base_url + backdrop_sizes;
+
+      const configGetList = values[1].data.results;
+
+      let listMovie = configGetList.map(function(movie){
+        console.log(movie);
+
+        let patImageMovie = pathUrl + movie.poster_path;
+        return {
+          _id: movie.id,
+          _url: patImageMovie,
+          _title: movie.title
+        }
+      })
+
+      this.setState({listData : listMovie})
+
+    }, reason => {
+      console.log(reason)
+    });
+  }
+
+  componentDidMount() {
+    this._promissAll();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -44,40 +88,29 @@ export class LastestMovies extends Component {
   
   _letLastestMovies = ()=> {
     let itemMovie = this.state.listData;
-    console.log("this.state.listData::::");
-    console.log(this.state.listData);
 
-    if ( itemMovie !== 0 ) {
-      console.log("vvvvvv");
-      console.log(itemMovie.id);
-      // let itemLastestMovie = itemMovie.map(function(val, index){
-      //   return (
-      //     <div className="item" key={index} >
-      //       <div className="w3l-movie-gride-agile w3l-movie-gride-slider">
-      //         <ItemProduct data={val}/>
-      //       </div>
-      //     </div>
-      //   )
-      // })
-      return ( <ItemProduct data={itemMovie}/> )
-      
+    // console.log(itemMovie);
+
+    if (itemMovie !=0) {
+      let item = itemMovie.map(function(val, index){
+        console.log(val);
+        return ( <ItemProduct data={val} key={index} /> )
+      })
+
+      return item
     }
   }
 
   render() {
     return (
       <div>
-        
         <h3 className="agile_w3_title"> Latest <span>Movies</span></h3>
         <div className="w3_agile_latest_movies">
           <div id="owl-demo" className="owl-carousel owl-theme">
             {this._letLastestMovies()}
           </div>
         </div>
-
-        {/* <Services/> */}
       </div>
-
     );
   }
 }

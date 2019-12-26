@@ -12,16 +12,14 @@ export class Tab extends Component {
       dataBaseState : []
     }
   }
-
+  
   _getData = ()=> {
         
     let _dataAxios = axios.get('https://api.themoviedb.org/3/movie/latest?api_key=1e2d3e04a46a4b641682a83ebd1b0bf1&language=en-US');
 
     let dataAsiox = _dataAxios.then(function (response) {
             // handle success
-            console.log(response);
             return response;
-            console.log(response);
         })
         .catch(function (error) {
             // handle error
@@ -34,7 +32,6 @@ export class Tab extends Component {
   }
 
   _getItemsProduct = () => {
-    console.log(this._getData());
     this._getData();
 
     let itemProduct = DataBase.map(function(val, index){
@@ -51,9 +48,6 @@ export class Tab extends Component {
     });
     
     this.setState({dataBaseState: itemProduct });
-    // this.setState ({
-    //   dataBaseState: itemProduct
-    // })
   }
 
   componentDidMount() {
