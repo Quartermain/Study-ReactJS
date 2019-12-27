@@ -53,18 +53,21 @@ export class LastestMovies extends Component {
       const configGetList = values[1].data.results;
 
       let listMovie = configGetList.map(function(movie){
-        console.log(movie);
 
         let patImageMovie = pathUrl + movie.poster_path;
+        let fullYear = new Date(movie.release_date);
+        let year = fullYear.getFullYear()
+
         return {
           _id: movie.id,
           _url: patImageMovie,
-          _title: movie.title
+          _title: movie.title,
+          _time: year,
+          _vote_average: movie.vote_average
         }
       })
 
       this.setState({listData : listMovie})
-
     }, reason => {
       console.log(reason)
     });
@@ -93,7 +96,6 @@ export class LastestMovies extends Component {
 
     if (itemMovie !=0) {
       let item = itemMovie.map(function(val, index){
-        console.log(val);
         return ( <ItemProduct data={val} key={index} /> )
       })
 

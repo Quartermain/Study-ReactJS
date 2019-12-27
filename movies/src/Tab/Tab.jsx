@@ -9,9 +9,20 @@ export class Tab extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataBaseState : []
+      dataBaseState : [],
+      listDataTab : [],
+      configuration: {
+        images: {
+          "base_url": "",
+          "secure_base_url": "",
+          "backdrop_sizes": [
+            ""
+          ]
+        }
+      }
     }
   }
+  
   
   _getData = ()=> {
         
