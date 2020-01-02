@@ -30,7 +30,7 @@ export class ItemProduct extends Component {
     }
 
     return (
-      <div>
+      <React.Fragment>
         <a href="single.html" className="hvr-sweep-to-bottom">
           <img src={this.props.data._url} title="Movies Pro" className="img-responsive" alt="true" />
           <div className="w3l-action-icon">
@@ -55,7 +55,7 @@ export class ItemProduct extends Component {
         <div className="ribben one">
           <p>{this.props.data.ribben}</p>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }

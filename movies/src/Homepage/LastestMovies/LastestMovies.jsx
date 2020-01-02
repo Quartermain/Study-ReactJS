@@ -78,7 +78,7 @@ export class LastestMovies extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (nextState != this.state) {
+    if (nextState !== this.state) {
       return true;
     } else {
       return false;
@@ -94,7 +94,7 @@ export class LastestMovies extends Component {
 
     // console.log(itemMovie);
 
-    if (itemMovie !=0) {
+    if (itemMovie !==0) {
       let item = itemMovie.map(function(val, index){
         return ( <ItemProduct data={val} key={index} /> )
       })
@@ -105,14 +105,14 @@ export class LastestMovies extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <h3 className="agile_w3_title"> Latest <span>Movies</span></h3>
         <div className="w3_agile_latest_movies">
           <div id="owl-demo" className="owl-carousel owl-theme">
             {this._letLastestMovies()}
           </div>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
