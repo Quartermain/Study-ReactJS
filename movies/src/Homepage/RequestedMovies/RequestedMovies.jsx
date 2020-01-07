@@ -4,18 +4,6 @@ import ItemProduct from '../Products/ItemProduct.jsx';
 import { getUpComingList, getConfiguration } from '../../Services/index.jsx';
 
 export class RequestedMovies extends Component {
-  // _letRequestMovies = ()=> {
-  //   let itemRequestMovies = DataBase.map(function(val, index){
-  //     return (
-  //       <div className="col-md-2 w3l-movie-gride-agile requested-movies" key={index}>
-  //         <ItemProduct data={val} />
-  //       </div>
-  //     )
-  //   })
-
-  //   return (itemRequestMovies)
-  // }
-
   constructor(props) {
     super(props);
     this.state= {
@@ -79,7 +67,6 @@ export class RequestedMovies extends Component {
   componentDidMount(){
     this._promisAll();
   }
-
   
   _letRequestMovies = ()=> {
     let itemMovie = this.state.listData;
@@ -104,7 +91,6 @@ export class RequestedMovies extends Component {
       return false;
     }
   }
-
 
   render() {
     return (

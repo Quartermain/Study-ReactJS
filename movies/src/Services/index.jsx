@@ -21,6 +21,11 @@ export const getUpComingList = () => {
     return axios.get(path);
 };
 
+export const getProducTab = () => {
+    const path = 'https://api.themoviedb.org/3/movie/top_rated?api_key=1e2d3e04a46a4b641682a83ebd1b0bf1&language=en-US&page=1'
+    return axios.get(path);
+};
+
 export const getConfiguration = () => {
     const path = 'https://api.themoviedb.org/3/configuration?api_key=1e2d3e04a46a4b641682a83ebd1b0bf1'
     return axios.get(path);

@@ -3,6 +3,7 @@ import MainProduct from './../Homepage/Products/MainProduct';
 import ItemProduct from './../Homepage/Products/ItemProduct';
 import DataBase from './../Database/Data.json';
 import axios from 'axios';
+import { getProducTab, getConfiguration } from '../Services';
 
 export class Tab extends Component {
 
@@ -21,6 +22,15 @@ export class Tab extends Component {
         }
       }
     }
+  }
+
+  _getConfigImage = ()=> {
+    const configImg = getConfiguration();
+
+  }
+  
+  _getProductTab = ()=> {
+    
   }
   
   
@@ -100,12 +110,14 @@ export class Tab extends Component {
   render() {
     return (
       <div className="agileinfo_tabs">
+        
         <div id="horizontalTab">
           <ul className="resp-tabs-list">
             <li>Recent</li>
             <li>Popularity</li>
             <li>Top Rating </li>
           </ul>
+          
           <div className="resp-tabs-container">
             <div className="tab1">
               <div className="tab_movies_agileinfo">
