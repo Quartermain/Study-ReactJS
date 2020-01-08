@@ -2,8 +2,28 @@ import React, { Component } from 'react';
 
 export class MainProduct extends Component {
   render() {
+    const voteRate = ()=> {
+      let vote = this.props.data._vote_average/2;
+      const arr = [];
+      for (let i = 1; i <= 5; i++) {
+        if (i <= vote) {
+         arr.push(<li key={i}><a href="#"><i className="fa fa-star" aria-hidden="true" /></a></li>);
+        }
+
+        else if (i > vote && vote > i-1){
+          arr.push(<li key={i}><a href="#"><i className="fa fa-star-half-o" aria-hidden="true" /></a></li>);
+        }
+
+        else{
+          arr.push(<li key={i}><a href="#"><i className="fa fa-star-o" aria-hidden="true" /></a></li>);
+        }
+      }
+
+      return arr;
+    }
+
     return (
-      <div>
+      <>
         <div className="video-grid-single-page-agileits">
           <div data-video="BXEZFd0RT5Y" id="video3"><img src={this.props.data.img} alt="true" className="img-responsive" /> </div>
         </div>
@@ -19,7 +39,8 @@ export class MainProduct extends Component {
             <span>Genres<label>:</label> </span>
             {this.props.data.genres}							
           </p>
-          <p className="fexi_header_para fexi_header_para1"><span>Star Rating<label>:</label></span>
+          <p className="fexi_header_para fexi_header_para1">
+            <span>Star Rating<label>:</label></span>
             <a href="#"><i className="fa fa-star" aria-hidden="true" /></a>
             <a href="#"><i className="fa fa-star" aria-hidden="true" /></a>
             <a href="#"><i className="fa fa-star-half-o" aria-hidden="true" /></a>
@@ -27,7 +48,7 @@ export class MainProduct extends Component {
             <a href="#"><i className="fa fa-star-o" aria-hidden="true" /></a>
           </p>
         </div>
-      </div>
+      </>
     );
   }
 }
