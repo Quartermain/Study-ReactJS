@@ -27,37 +27,65 @@ class TabRecent extends Component {
     return configImg
   }
 
-  _getDiscoverList =()=> {
+  _getRecent =()=> {
     const getMovie = getRecent();
 
     return getMovie
   }
 
+  _formatDate =(date)=> {
+    let monthNames = [
+      "January", "February", "March",
+      "April", "May", "June", "July",
+      "August", "September", "October",
+      "November", "December"
+    ];
+  
+    let day = date.getDate();
+    let monthIndex = date.getMonth();
+    let year = date.getFullYear();
+  
+    return day + ' ' + monthNames[monthIndex] + ' ' + year;
+    
+  }
+
   _promissAll = ()=> {
     const getConfig = this._getConfigImage();
-    const getList = this._getDiscoverList();
-
+    const getList = this._getRecent();
+    const that = this;
     Promise.all([getConfig, getList]).then(values => {
       const configPromisImage = values[0].data.images;
-
+      // Get url image product
       const base_url = configPromisImage.base_url;
       const backdrop_sizes = configPromisImage.backdrop_sizes[2];
+      const poster_sizes = configPromisImage.poster_sizes[5];      
 
       const pathUrl = base_url + backdrop_sizes;
+      const pathUrlPoster = base_url + poster_sizes
 
-      const configGetList = values[1].data.results;
+      const configGetList = values[1].data.results;      
 
       let listMovie = configGetList.map(function(movie){
 
         let patImageMovie = pathUrl + movie.poster_path;
+        let pathImageLarger = pathUrlPoster + movie.poster_path;
+        // show only Year
         let fullYear = new Date(movie.release_date);
-        let year = fullYear.getFullYear()
+        let year = fullYear.getFullYear();
+
+        // Show full date month day year
+
+        let fullMDY = that._formatDate(fullYear);
 
         return {
           _id: movie.id,
           _url: patImageMovie,
+          _url_Larg: pathImageLarger,
           _title: movie.title,
+          _overview: movie.overview,
           _time: year,
+          _timeFull: fullMDY,
+          _genre: movie.genre_ids,
           _vote_average: movie.vote_average
         }
       })
@@ -79,63 +107,59 @@ class TabRecent extends Component {
       return false;
     }
   }
-
-  componentDidUpdate(prevProps) {
-    window.initSlider();
-  }
   
-    _letTabRecentMovies = ()=> {
-        let itemMovie = this.state.listData;
+  _letTabRecentMovies = ()=> {
+      let itemMovie = this.state.listData;
 
-        if (itemMovie !==0) {
-            let item = itemMovie.map(function(val, index){
-                if (index < 8) {
-                    return (             
-                        <div className="w3l-movie-gride-agile" key={index}>
-                            <ItemProduct data={val} />
-                        </div>
-                    )
-                }
-            })
+      if (itemMovie !==0) {
+        let item = itemMovie.map(function(val, index){
+          if (index > 1 && index < 9) {
+            return (             
+              <div className="w3l-movie-gride-agile" key={index}>
+                  <ItemProduct data={val} />
+              </div>
+            )
+          }
+        })
 
-            return item
-        }
-    }
+        return item
+      }
+  }
 
-    _letTabRecentMainMovies = ()=> {
-        let itemMovie = this.state.listData;
+  _letTabRecentMainMovies = ()=> {
+      let itemMovie = this.state.listData;
 
-        if (itemMovie !==0) {
-            let item = itemMovie.map(function(val, index){
-                if (index == 0) {
-                    return (
-                        <MainProduct data={val} key={index} />
-                    )
-                }
-            })
+      if (itemMovie !==0) {
+        let item = itemMovie.map(function(val, index){
+            if (index == 0) {
+              return (
+                <MainProduct data={val} key={index} />
+              )
+            }
+        })
 
-            return item
-        }
-    }
+        return item
+      }
+  }
 
-    render() {
-        return (
-            <div className="tab1">
-              <div className="tab_movies_agileinfo">
-                <div className="w3_agile_featured_movies">
-                  <div className="col-md-5 video_agile_player">
-                    { this._letTabRecentMainMovies() }                    
-                  </div>
-                  <div className="col-md-7 wthree_agile-movies_list">
-                      { this._letTabRecentMovies() }             
-                  </div>
-                  <div className="clearfix"> </div>
-                </div>
-                <div className="cleafix" />
-              </div>	
+  render() {
+    return (
+      <div className="tab1">
+        <div className="tab_movies_agileinfo">
+          <div className="w3_agile_featured_movies">
+            <div className="col-md-5 video_agile_player">
+              { this._letTabRecentMainMovies() }                    
             </div>
-        );
-    }
+            <div className="col-md-7 wthree_agile-movies_list">
+                { this._letTabRecentMovies() }             
+            </div>
+            <div className="clearfix"></div>
+          </div>
+          <div className="cleafix" />
+        </div>	
+      </div>
+    );
+  }
 }
 
 export default TabRecent;

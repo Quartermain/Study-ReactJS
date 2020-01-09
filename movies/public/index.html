@@ -59,7 +59,7 @@
     -->
   
   <script src="%PUBLIC_URL%/assest/js/jquery-1.11.1.min.js"></script>
-	// <!-- Dropdown-Menu-JavaScript -->
+  <!-- Dropdown-Menu-JavaScript -->
   <script>
     $(document).ready(function(){
       $(".dropdown").hover(            
@@ -151,36 +151,22 @@
   <link href="%PUBLIC_URL%/assest/css/owl.carousel.css" rel="stylesheet" type="text/css" media="all">
   <script src="%PUBLIC_URL%/assest/js/owl.carousel.js"></script>
   <script>
-    // $(document).ready(function() { 
-    //   $("#owl-demo").owlCarousel({
-    
-    //   autoPlay: 3000, //Set AutoPlay to 3 seconds
-    //     autoPlay : true,
-    //     navigation :true,
+    function initSlider() {
+      $(document).ready(function() {
+        $("#owl-demo").owlCarousel({
+      
+        autoPlay: 3000, //Set AutoPlay to 3 seconds
+          autoPlay : true,
+          navigation :true,
 
-    //     items : 5,
-    //     itemsDesktop : [640,4],
-    //     itemsDesktopSmall : [414,3]
-    
-    //   });
-    // }); 
-    
-function initSlider() {
-	$(document).ready(function() {
-		$("#owl-demo").owlCarousel({
-	 
-		 autoPlay: 3000, //Set AutoPlay to 3 seconds
-		  autoPlay : true,
-		   navigation :true,
-
-		  items : 5,
-		  itemsDesktop : [640,4],
-		  itemsDesktopSmall : [414,3]
-	 
-		});
-	 
-	}); 
-}
+          items : 5,
+          itemsDesktop : [640,4],
+          itemsDesktopSmall : [414,3]
+      
+        });
+      
+      }); 
+    }
   </script>
   <script type="text/javascript" src="%PUBLIC_URL%/assest/js/move-top.js"></script>
   <script type="text/javascript" src="%PUBLIC_URL%/assest/js/easing.js"></script>
