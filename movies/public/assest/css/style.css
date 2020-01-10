@@ -1019,6 +1019,7 @@ a.w3_play_icon2 span {
 .player-text {
 	background: #0c0d0d;
 	padding: 1.8em 1em;
+	text-align: left;
 }
 
 p.fexi_header {

@@ -21,8 +21,11 @@ export const getUpComingList = () => {
     return axios.get(path);
 };
 
-export const getRecent = () => {
-    const path = 'https://api.themoviedb.org/3/movie/top_rated?api_key=1e2d3e04a46a4b641682a83ebd1b0bf1&language=en-US&page=1'
+export const getTabData = (params) => {
+    const apiName = params.param1;
+    const paramName = params.param2;
+    
+    const path = 'https://api.themoviedb.org/3/'+ apiName + '/'+ paramName + '?api_key=1e2d3e04a46a4b641682a83ebd1b0bf1&language=en-US&page=1'
     return axios.get(path);
 };
 

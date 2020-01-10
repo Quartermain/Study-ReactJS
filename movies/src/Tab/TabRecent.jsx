@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getConfiguration, getRecent } from '../Services';
+import { getConfiguration, getTabData } from '../Services';
 import ItemProduct from '../Homepage/Products/ItemProduct';
 import MainProduct from '../Homepage/Products/MainProduct';
 
@@ -27,8 +27,13 @@ class TabRecent extends Component {
     return configImg
   }
 
-  _getRecent =()=> {
-    const getMovie = getRecent();
+  _getTabData =()=> {
+    const params = {
+      param1 : 'movie',
+      param2 : this.props.recent
+    }
+    
+    const getMovie = getTabData(params);
 
     return getMovie
   }
@@ -45,13 +50,12 @@ class TabRecent extends Component {
     let monthIndex = date.getMonth();
     let year = date.getFullYear();
   
-    return day + ' ' + monthNames[monthIndex] + ' ' + year;
-    
+    return monthNames[monthIndex] + ' ' + day + ' ' + year;    
   }
 
   _promissAll = ()=> {
     const getConfig = this._getConfigImage();
-    const getList = this._getRecent();
+    const getList = this._getTabData();
     const that = this;
     Promise.all([getConfig, getList]).then(values => {
       const configPromisImage = values[0].data.images;
@@ -107,51 +111,51 @@ class TabRecent extends Component {
       return false;
     }
   }
-  
+
   _letTabRecentMovies = ()=> {
-      let itemMovie = this.state.listData;
+    let itemMovie = this.state.listData;
 
-      if (itemMovie !==0) {
-        let item = itemMovie.map(function(val, index){
-          if (index > 1 && index < 9) {
-            return (             
-              <div className="w3l-movie-gride-agile" key={index}>
-                  <ItemProduct data={val} />
-              </div>
-            )
-          }
-        })
+    if (itemMovie !==0) {
+      let item = itemMovie.map(function(val, index){
+        if (index > 1 && index < 10) {
+          return (             
+            <div className="w3l-movie-gride-agile" key={index}>
+                <ItemProduct data={val} />
+            </div>
+          )
+        }
+      })
 
-        return item
-      }
+      return item
+    }
   }
 
   _letTabRecentMainMovies = ()=> {
-      let itemMovie = this.state.listData;
+    let itemMovie = this.state.listData;
 
-      if (itemMovie !==0) {
-        let item = itemMovie.map(function(val, index){
-            if (index == 0) {
-              return (
-                <MainProduct data={val} key={index} />
-              )
-            }
-        })
+    if (itemMovie !==0) {
+      let item = itemMovie.map(function(val, index){
+          if (index == 0) {
+            return (
+              <MainProduct data={val} key={index} />
+            )
+          }
+      })
 
-        return item
-      }
+      return item
+    }
   }
 
   render() {
     return (
-      <div className="tab1">
+      <div className={this.props.name}>
         <div className="tab_movies_agileinfo">
           <div className="w3_agile_featured_movies">
             <div className="col-md-5 video_agile_player">
               { this._letTabRecentMainMovies() }                    
             </div>
             <div className="col-md-7 wthree_agile-movies_list">
-                { this._letTabRecentMovies() }             
+              { this._letTabRecentMovies() }             
             </div>
             <div className="clearfix"></div>
           </div>
