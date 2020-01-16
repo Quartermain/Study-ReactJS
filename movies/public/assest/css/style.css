@@ -3856,5 +3856,8 @@ ul.bottom-links-agile li a {
 	}
 }
 
+.header-slider .demo-1 {
+	position: absolute !important;
+}
 
 /*-- //responsive --*/

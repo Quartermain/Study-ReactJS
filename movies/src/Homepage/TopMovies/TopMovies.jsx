@@ -1,62 +1,172 @@
 import React, { Component } from 'react';
+import { getConfiguration, getTabData } from '../../Services';
 import ItemProduct from '../Products/ItemProduct';
 import MainProduct from '../Products/MainProduct';
-import DataBase from './../../Database/Data.json';
+
 
 export class TopMovies extends Component {
-  _letTopMovies = ()=> {
-    let itemTopProduct = DataBase.map(function(val, index){
-      return (
-        <div className="w3l-movie-gride-agile" key={index}>
-          <ItemProduct data={val} />
-        </div>
-      )
-    })
-    return (itemTopProduct)
+   
+  constructor(props) {
+    super(props);
+    this.state = {
+      listData : [],
+      configuration: {
+        images: {
+          "base_url": "",
+          "secure_base_url": "",
+          "backdrop_sizes": [
+            ""
+          ]
+        }
+      }
+    }
+  }
+
+  _getConfigImage =() => {
+    const configImg = getConfiguration();
+
+    return configImg
+  }
+
+  _getTabData =()=> {
+    const params = {
+      param1 : 'movie',
+      param2 : 'popular'
+    }
+    
+    const getMovie = getTabData(params);
+
+    return getMovie
+  }
+
+  _formatDate =(date)=> {
+    let monthNames = [
+      "January", "February", "March",
+      "April", "May", "June", "July",
+      "August", "September", "October",
+      "November", "December"
+    ];
+  
+    let day = date.getDate();
+    let monthIndex = date.getMonth();
+    let year = date.getFullYear();
+  
+    return monthNames[monthIndex] + ' ' + day + ' ' + year;    
+  }
+
+  _promissAll = ()=> {
+    const getConfig = this._getConfigImage();
+    const getList = this._getTabData();
+    const that = this;
+    Promise.all([getConfig, getList]).then(values => {
+      const configPromisImage = values[0].data.images;
+      // Get url image product
+      const base_url = configPromisImage.base_url;
+      const backdrop_sizes = configPromisImage.backdrop_sizes[2];
+      const poster_sizes = configPromisImage.poster_sizes[5];      
+
+      const pathUrl = base_url + backdrop_sizes;
+      const pathUrlPoster = base_url + poster_sizes
+
+      const configGetList = values[1].data.results;      
+
+      let listMovie = configGetList.map(function(movie){
+
+        let patImageMovie = pathUrl + movie.poster_path;
+        let pathImageLarger = pathUrlPoster + movie.poster_path;
+        // show only Year
+        let fullYear = new Date(movie.release_date);
+        let year = fullYear.getFullYear();
+
+        // Show full date month day year
+
+        let fullMDY = that._formatDate(fullYear);
+
+        return {
+          _id: movie.id,
+          _url: patImageMovie,
+          _url_Larg: pathImageLarger,
+          _title: movie.title,
+          _overview: movie.overview,
+          _time: year,
+          _timeFull: fullMDY,
+          _genre: movie.genre_ids,
+          _vote_average: movie.vote_average
+        }
+      })
+
+      this.setState({listData : listMovie})
+    }, reason => {
+      console.log(reason)
+    });
+  }
+
+  componentDidMount() {
+    this._promissAll();
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextState !== this.state) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  _letTabRecentMovies = ()=> {
+    let itemMovie = this.state.listData;
+
+    if (itemMovie !==0) {
+      let item = itemMovie.map(function(val, index){
+        if (index > 1 && index < 10) {
+          return (             
+            <div className="w3l-movie-gride-agile" key={index}>
+                <ItemProduct data={val} />
+            </div>
+          )
+        }
+      })
+
+      return item
+    }
+  }
+
+  _letTabRecentMainMovies = ()=> {
+    let itemMovie = this.state.listData;
+
+    if (itemMovie !==0) {
+      let item = itemMovie.map(function(val, index){
+          if (index == 0) {
+            return (
+              <MainProduct data={val} key={index} />
+            )
+          }
+      })
+
+      return item
+    }
   }
 
   render() {
     return (
-      <div>
-        <div>
-          <h3 className="agile_w3_title">Top<span>Movies</span> </h3>
-          <div className="top_movies">
-            <div className="tab_movies_agileinfo">
-              <div className="w3_agile_featured_movies two">
-                <div className="col-md-7 wthree_agile-movies_list second-top">
-                  {this._letTopMovies()}
-                </div>
-                <div className="col-md-5 video_agile_player second-top">
-                  <div className="video-grid-single-page-agileits">
-                    <div data-video="BXEZFd0RT5Y" id="video3"> <img src="images/44.jpg" alt="true" className="img-responsive" /> </div>
-                  </div>
-                  <div className="player-text two">
-                    <p className="fexi_header">Storks </p>
-                    <p className="fexi_header_para"><span className="conjuring_w3">Story Line<label>:</label></span>Starring: Andy Samberg, Jennifer Aniston, Ty Burrell
-                      Storks Official Trailer 3 (2016) - Andy Samberg Movie  the company's top delivery stork, lands in hot water when the Baby Factory produces an adorable....... </p>
-                    <p className="fexi_header_para"><span>Release On<label>:</label></span>Aug 1, 2016 </p>
-                    <p className="fexi_header_para">
-                      <span>Genres<label>:</label> </span>
-                      <a href="genre.html">Drama</a> | 
-                      <a href="genre.html">Adventure</a> | 
-                      <a href="genre.html">Family</a>								
-                    </p>
-                    <p className="fexi_header_para fexi_header_para1"><span>Star Rating<label>:</label></span>
-                      <a href="#"><i className="fa fa-star" aria-hidden="true" /></a>
-                      <a href="#"><i className="fa fa-star" aria-hidden="true" /></a>
-                      <a href="#"><i className="fa fa-star-half-o" aria-hidden="true" /></a>
-                      <a href="#"><i className="fa fa-star-o" aria-hidden="true" /></a>
-                      <a href="#"><i className="fa fa-star-o" aria-hidden="true" /></a>
-                    </p>
-                  </div>
-                </div>
-                <div className="clearfix"> </div>
+      <>
+        <h3 className="agile_w3_title">Top<span>Movies</span> </h3>
+        <div className="top_movies">
+          <div className="tab_movies_agileinfo">
+            <div className="w3_agile_featured_movies two">
+              <div className="col-md-7 wthree_agile-movies_list second-top">
+                { this._letTabRecentMovies() }
+                
               </div>
-              <div className="cleafix" />
-            </div>	
-          </div>
+              <div className="col-md-5 video_agile_player second-top">
+                { this._letTabRecentMainMovies() }
+              </div>
+              <div className="clearfix"> </div>
+            </div>
+            <div className="cleafix" />
+          </div>	
         </div>
-      </div>
+      </>
     );
   }
 }

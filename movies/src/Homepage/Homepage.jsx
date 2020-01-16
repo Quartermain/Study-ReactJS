@@ -11,7 +11,7 @@ import TopMovies from './TopMovies/TopMovies';
 export class Homepage extends Component {
   render() {
     return (
-      <div>
+      <>
         <Headers/>
         <BlockInfo/>
         <div className="w3_content_agilleinfo_inner">
@@ -23,7 +23,7 @@ export class Homepage extends Component {
           </div>
         </div>
         <Footers/>
-      </div>
+      </>
     );
   }
 }

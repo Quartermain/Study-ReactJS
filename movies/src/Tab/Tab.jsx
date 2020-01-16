@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import TabRecent from './TabRecent';
-import TabPopularity from './TabPopularity';
-import TabTopRating from './TabTopRating';
 
 export class Tab extends Component {
 
@@ -14,11 +12,11 @@ export class Tab extends Component {
             <li>Popularity</li>
             <li>Top Rating </li>
           </ul>
-          
+
           <div className="resp-tabs-container">
             <TabRecent name='Tab1' recent='top_rated' />
-            <TabRecent name='Tab2' popularity=''/>
-            <TabRecent name='Tab3' toprate=''/>
+            <TabRecent name='Tab2' recent='popular'/>
+            <TabRecent name='Tab3' recent='now_playing'/>
           </div>
         </div>
       </div>

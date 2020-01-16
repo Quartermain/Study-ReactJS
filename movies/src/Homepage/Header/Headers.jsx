@@ -7,7 +7,9 @@ import BannerInfor from './BannerInfor';
 export class Headers extends Component {
   render() {
     return (
-      <div id="demo-1" className="demo-1" data-zs-src='["./assest/images/2.jpg", "./assest/images/1.jpg", "./assest/images/3.jpg","./assest/images/4.jpg"]' data-zs-overlay="dots">
+      <div className="header-slider">
+        <div id="demo-1" className="demo-1" data-zs-src='["./assest/images/2.jpg", "./assest/images/1.jpg", "./assest/images/3.jpg","./assest/images/4.jpg"]' data-zs-overlay="dots">
+        </div>
         <div className="demo-inner-content">
           <div className="header-w3-agileits" id="home">
             <div className="inner-header-agile">	
